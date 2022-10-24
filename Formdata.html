@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="aboutCat">
+        <div>
+            <label for="catname">Кличка питомца</label><br>
+            <input type="text" id="catname" value="" placeholder="Введите кличку питомца" maxlength="20"   required/>
+        </div>
+        <div>
+            <label for="owner">Имя владельца</label><br>
+            <input type="text" id="owner" value="" placeholder="Введите ваше имя" maxlength="22" required/>
+        </div>
+        <div>
+            <p>Порода питомца</p><br>
+            <select name="breed" id="catbreed">
+                <option value="first option">Ориентальная</option>
+                <option value="second option">Британская</option>
+                <option value="third option">Бирманская</option>
+                <option value="vor option">Персидская</option>
+                <option value="five option">Абиссинская</option>
+                <option value="sex option">Сфинкс</option>
+                <option value="seven option">Персидская</option>
+                <option value="eight option">Без породы</option>
+                <option selected value="nine option">Другое</option>
+            </select>
+        </div>
+        <div>
+            <p>Чем питается<p>
+                    <input type="checkbox" id="1" name="feed" value="dry" />
+                    <label for="1">Сухой корм</label><br>
+                    <input type="checkbox" id="2" name="feed" value="wet" />
+                    <label for="2">Влажный корм</label><br>
+                    <input type="checkbox" id="3" name="feed" value="natural" />
+                    <label for="3">Натуральный корм</label>
+        </div>
+        <div>
+            <p>Пол животного</p><br>
+            <input type="radio" id="M" name="sex" value="male"/>
+            <label for="M">Самец</label><br>
+            <input type="radio" id="F" name="sex" value="female" />
+            <label for="F">Самка</label><br>
+            <input type="radio" id="T" name="sex" value="undefined"/>
+            <label for="T">Трансгендер</label><br>
+        </div>
+        <div>
+            <label for="Commentary">Комментарий владельца</label><br>
+            <textarea id="Commentary" style="resize: none;" cols="25" rows="6" maxlength="120" ></textarea>
+        </div>
+        <div>
+            <label for="photo">Загрузите фото питомца</label><br>
+            <input type="file" id="photo" />
+        </div>
+        <div>
+            <input type="submit" value="Сохранить" />
+        </div>
+    </form>
+    <script>
+let aboutCat = document.querySelector(`.aboutCat`);
+
+aboutCat.onsubmit = function postForm(event) {
+    event.preventDefault();
+    fetch("https://httpbin.org/post", {
+            method: `POST`,
+            body: new FormData(aboutCat),
+        })
+        .then(response => response.json())
+        .then(aboutCat => {
+            console.log(aboutCat);
+        })
+        .catch(error => console.log(error));
+}
+
+
+        
+ 
+
+       
+    </script>
+</body>
+
+</html>
